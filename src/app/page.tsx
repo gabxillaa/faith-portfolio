@@ -48,8 +48,16 @@ const NavBar = () => (
 );
 
 // Enhanced Star Field
+interface Star {
+  id: number;
+  left: string;
+  top: string;
+  size: number;
+  delay: number;
+}
+
 const StarField = () => {
-  const [stars, setStars] = useState<any[]>([]);
+  const [stars, setStars] = useState<Star[]>([]);
   useEffect(() => {
     const arr = Array.from({ length: 100 }).map((_, i) => ({
       id: i,
@@ -83,7 +91,13 @@ const StarField = () => {
 };
 
 // PDF Preview Modal
-const PdfModal = ({ file, isOpen, onClose }: any) => {
+interface PdfModalProps {
+  file: string | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const PdfModal = ({ file, isOpen, onClose }: PdfModalProps) => {
   if (!isOpen) return null;
   const fileUrl = file ? `/${encodeURIComponent(file)}` : "";
 
@@ -326,7 +340,7 @@ export default function Portfolio() {
 
                   <div className="mt-auto pt-4 border-t border-indigo-100">
                     <p className="text-xs font-bold text-purple-500 uppercase tracking-wider mb-2 font-bubbly">My Reflection</p>
-                    <p className="text-sm text-indigo-900/80 italic font-medium">"{lesson.ref}"</p>
+                    <p className="text-sm text-indigo-900/80 italic font-medium">&ldquo;{lesson.ref}&rdquo;</p>
                   </div>
                 </motion.div>
               </motion.div>
